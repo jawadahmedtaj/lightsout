@@ -42,6 +42,13 @@ class Board extends Component {
     this.state = {
       hasWon: false,
       board: this.createBoard()
+      // board: [
+      //   [true, true, false, false, false],
+      //   [true, false, false, false, false],
+      //   [false, false, false, false, false],
+      //   [false, false, false, false, false],
+      //   [false, false, false, false, false]
+      // ]
     };
   }
 
@@ -87,14 +94,17 @@ class Board extends Component {
     // win when every cell is turned off
     // TODO: determine is the game has been won
 
-    let hasWon = false;
-
+    let hasWon = board.every(row => row.every(cell => !cell));
+    console.log(hasWon);
     this.setState({ board, hasWon });
   }
 
   /** Render game board or winning message. */
 
   render() {
+    if (this.state.hasWon) {
+      return <h1>You Won!!</h1>;
+    }
     // if the game is won, just show a winning msg & render nothing else
 
     // TODO
